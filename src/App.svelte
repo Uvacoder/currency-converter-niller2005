@@ -39,7 +39,7 @@
         <div class="relative">
           <input
             bind:value={toValue}
-            on:input={() => (dkkValue = +(toRate * toValue))}
+            on:input={() => (dkkValue = +(toRate * toValue).toFixed(2))}
             type="number"
             class="w-full pr-16 input input-bordered" />
           <select
