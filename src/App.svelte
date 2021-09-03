@@ -8,10 +8,9 @@
     return await r.json()
   })()
 
-  let curValue: number
+  let toRate: number
   let dkkValue = 1
-
-  $: convertedValue = +(dkkValue / curValue).toFixed(2)
+  $: toValue = +(dkkValue / toRate).toFixed(2)
 </script>
 
 <section class="flex items-center justify-center h-screen">
@@ -25,7 +24,7 @@
             bind:value={dkkValue}
             type="number"
             min="0"
-            class="w-full pr-16 input input-accent input-bordered" />
+            class="w-full pr-16 input input-bordered" />
           <button
             class="absolute top-0 right-0 w-16 rounded-l-none cursor-default btn btn-active btn-accent no-animation">
             DKK
@@ -39,12 +38,12 @@
       <div class="w-full form-control">
         <div class="relative">
           <input
-            bind:value={convertedValue}
-            disabled="disabled"
+            bind:value={toValue}
+            on:input={() => (dkkValue = +(toRate * toValue))}
             type="number"
-            class="w-full pr-16 input input-accent input-bordered" />
+            class="w-full pr-16 input input-bordered" />
           <select
-            bind:value={curValue}
+            bind:value={toRate}
             class="absolute top-0 right-0 max-w-xs rounded-l-none select select-bordered">
             {#each Object.keys(er.rates) as symbol}
               <option value={er.rates[symbol]}>{symbol}</option>
